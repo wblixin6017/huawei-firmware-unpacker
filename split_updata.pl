@@ -24,19 +24,20 @@ use warnings;
 
 my $CRC_CHECK= -e "crc" && -x _;
  
-my %fileHash=(	"\x00\x00\x00\x10","appsboot.mbn",
+my %fileHash=( "\x00\x00\x00\x00", "system.img",
+		"\x00\x00\x00\x10","appsboot.mbn",
 		"\x00\x00\x00\x20","file25.mbn",
-		"\x00\x00\x00\x30","boot.img",
-		"\x00\x00\x00\x40","system.img",
+		"\x00\x00\x00\x30","testing.img",
+		"\x00\x00\x00\x40","recovery.img",
 		"\x00\x00\x00\x50","userdata.img",
-		"\x00\x00\x00\x60","recovery.img",
+		"\x00\x00\x00\x70","unicom.img",
 		"\x00\x00\x00\xB0","FactoryImage.img",
 		"\x00\x00\x00\xC0","file11.mbn",
 		"\x00\x00\x00\xD0","amss.mbn",
 		"\x00\x00\x00\xE0","oemsbl.mbn",
+		"\x00\x00\x00\xE4","splash.raw565",
 		"\x00\x00\x00\xF0","file04.mbn", #oemsblhd.mbn?
 		"\x00\x00\x00\xF1","file07.mbn",
-		"\x00\x00\x00\xF2","splash.raw565",
 		"\x00\x00\x00\xF3","file01.mbn",
 		"\x00\x00\x00\xF4","file02.mbn",
 		"\x00\x00\x00\xF5","file14.mbn",
@@ -46,7 +47,7 @@ my %fileHash=(	"\x00\x00\x00\x10","appsboot.mbn",
 		"\x00\x00\x00\xF9","version.txt",
 		"\x00\x00\x00\xFA","file20.mbn",
 		"\x00\x00\x00\xFB","appsboothd.mbn",
-		"\x00\x00\x00\xFC","file23.mbn",
+		"\x00\x00\x00\xFC","boot.img",
 		"\x00\x00\x00\xFD","file16.mbn",
 		"\x00\x00\x00\xFE","file18.mbn",
 		"\x00\x00\x00\xFF","file21.mbn",
@@ -139,6 +140,7 @@ sub dump_file {
 	$outfilename=$fileHash{$fileSeq};
     } else {
 	$outfilename="unknown_file.$unknown_count";
+    printf "Unknown file %s found", slimhexdump($fileSeq);
 	$unknown_count++;
     }
     
